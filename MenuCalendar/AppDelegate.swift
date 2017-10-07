@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         popover.contentViewController = CalendarViewController(nibName: "CalendarViewController", bundle: nil)
         
+        // パネル以外でマウスをクリックしたらパネルを隠す
+        popover.behavior = .transient
 
     }
 
