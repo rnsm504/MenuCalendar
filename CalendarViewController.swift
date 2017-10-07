@@ -106,8 +106,36 @@ extension CalendarViewController : NSCollectionViewDataSource {
         } else {
             collectionViewItem.view.layer?.backgroundColor = NSColor.lightGray.cgColor
         }
+        
+        collectionViewItem.textField?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        // 日曜なら背景を変える
+        let t = indexPath.item
+        if(items[indexPath.item] != 0 && t % 7 == 0) {
+            collectionViewItem.view.layer?.backgroundColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+            collectionViewItem.textField?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+        
+        // 土曜なら背景を変える
+        if(items[indexPath.item] != 0 && t % 7 == 6) {
+            collectionViewItem.view.layer?.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            collectionViewItem.textField?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+        
+        // 祝日なら背景を変える
+        if(items[indexPath.item] != 0) {
+            let d : String = items[indexPath.item] >= 10 ? String(describing: items[indexPath.item]) : "0" + String(describing: items[indexPath.item])
+            let m : String = calComps.month >= 10 ? String(describing: calComps.month) : "0" + String(describing: calComps.month)
+            let v = m + d
+            if let _ = SyukujituAry.index(of: v) {
+                collectionViewItem.view.layer?.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
+                collectionViewItem.textField?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            }
+        }
+
         return item
     }
+    
+   
     
 }
 
