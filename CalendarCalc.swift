@@ -69,7 +69,7 @@ class CalComps {
         comps = calendar.dateComponents([.year, .month, .weekday], from: firstdate!)
         firstWeekDay = comps.weekday! - 1
         
-        let mon = comps.month! > 10 ? String(describing: comps.month!) : "0" + String(describing: comps.month!)
+        let mon = String(format: "%02d", comps.month!)
         thisMonth = String(describing: comps.year!) + mon
         
         let range = calendar.range(of: .day, in: .month, for: date)!
